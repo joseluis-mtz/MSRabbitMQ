@@ -1,0 +1,8 @@
+Dominio principal Uno
+- Bus -> Representa una implementacion de RabbitMQ (Se crea modelo abstracto para usar otro Event Bus [Kafka])
+Dominio principal Dos
+- Commands
+Dominio principal Tres
+- Events
+
+Trabajo con patron - Mediator - .NET Paquete MediaTR

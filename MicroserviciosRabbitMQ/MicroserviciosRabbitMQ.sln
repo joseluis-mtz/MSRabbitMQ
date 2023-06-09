@@ -3,9 +3,41 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dominios", "Dominios", "{44DB231E-2BD9-49A3-95E4-4ADD8FE91814}"
+	ProjectSection(SolutionItems) = preProject
+		ClasesDeDominio.txt = ClasesDeDominio.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra.Bus", "Infra.Bus", "{E324568F-52EC-4FEB-863F-9B4CC22705C8}"
+	ProjectSection(SolutionItems) = preProject
+		Interfaces_Contratos.txt = Interfaces_Contratos.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra.IoC", "Infra.IoC", "{EB17B0D7-A1A8-4DD7-A2DB-742DFCACF1A7}"
+	ProjectSection(SolutionItems) = preProject
+		InyeccionesDependencias.txt = InyeccionesDependencias.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservicios", "Microservicios", "{A80D41CD-E10B-4753-B815-B01065FA884B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroRabbit.Domain.Core", "MicroRabbit.Domain.Core\MicroRabbit.Domain.Core.csproj", "{6A2A999D-C796-496F-85C6-55F14C7D9FEE}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A2A999D-C796-496F-85C6-55F14C7D9FEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A2A999D-C796-496F-85C6-55F14C7D9FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A2A999D-C796-496F-85C6-55F14C7D9FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A2A999D-C796-496F-85C6-55F14C7D9FEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6A2A999D-C796-496F-85C6-55F14C7D9FEE} = {44DB231E-2BD9-49A3-95E4-4ADD8FE91814}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {45EA5733-8750-4BF3-87C4-FB85D6925825}
