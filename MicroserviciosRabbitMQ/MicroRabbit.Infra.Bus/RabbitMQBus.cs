@@ -2,6 +2,7 @@
 using MicroRabbit.Domain.Core.Bus;
 using MicroRabbit.Domain.Core.Comandos;
 using MicroRabbit.Domain.Core.Eventos;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System.Text;
@@ -12,18 +13,20 @@ namespace MicroRabbit.Infra.Bus
     // sealed: No permite heredar e implementa interfaz
     public sealed class RabbitMQBus : IEventBus
     {
+        private readonly RabbitConfig _rabbitConfig;
         private readonly IMediator _mediator; // Crear referencia del Mediator
         // Diccionario para manejar eventos del Bus
         private readonly Dictionary<string, List<Type>> _manejadores;
         // Lista que almacena los tipos de eventos
         private readonly List<Type> _tiposEvento;
 
-        public RabbitMQBus(IMediator mediator)
+        public RabbitMQBus(IMediator mediator, IOptions<RabbitConfig> ajustes)
         {
             // Inyeccion de los objetos
             _mediator = mediator;
             _manejadores = new Dictionary<string, List<Type>>();
             _tiposEvento = new List<Type>();
+            _rabbitConfig = ajustes.Value;
         }
 
         public Task EnviarComando<T>(T Comando) where T : Comandos
@@ -42,9 +45,9 @@ namespace MicroRabbit.Infra.Bus
         {
             var Fabrica = new ConnectionFactory
             {
-                HostName = "localhost",
-                Password = "SAsa123$",
-                UserName = "sa",
+                HostName = _rabbitConfig.Hostname,
+                Password = _rabbitConfig.Password,
+                UserName = _rabbitConfig.Usuario,
             };
 
             using (var Conexion = Fabrica.CreateConnection())
