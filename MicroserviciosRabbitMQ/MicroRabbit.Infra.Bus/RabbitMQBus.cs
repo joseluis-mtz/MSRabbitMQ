@@ -5,8 +5,8 @@ using MicroRabbit.Domain.Core.Eventos;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System.Text;
-using System.Text.Json.Serialization;
 
 namespace MicroRabbit.Infra.Bus
 {
@@ -38,7 +38,71 @@ namespace MicroRabbit.Infra.Bus
             where T : Eventos
             where TH : IManejadorEventos<T>
         {
-            throw new NotImplementedException();
+            var NombreEvento = typeof(T).Name; // Obtener nombre del avento o Queue
+            var ManejadorTipo = typeof(TH); // Obtener el objeto manejador
+            if (!_tiposEvento.Contains(typeof(T)))
+            {
+                _tiposEvento.Add(typeof(T));
+            }
+            if (!_manejadores.ContainsKey(NombreEvento))
+            {
+                _manejadores.Add(NombreEvento, new List<Type>());
+            }
+            if (_manejadores[NombreEvento].Any(s => s.GetType() == ManejadorTipo))
+            {
+                throw new ArgumentException($"El handler exception {ManejadorTipo.Name} ya fue registrado antes por '{NombreEvento}'", nameof(ManejadorTipo));
+            }
+            _manejadores[NombreEvento].Add(ManejadorTipo);
+            IniciarConsumoBasico<T>();
+        }
+        private void IniciarConsumoBasico<T>() where T : Eventos
+        {
+            var Fabrica = new ConnectionFactory
+            {
+                HostName = _rabbitConfig.Hostname,
+                UserName = _rabbitConfig.Usuario,
+                Password = _rabbitConfig.Password,
+                DispatchConsumersAsync = true, // Se hace el dispach del consumer de manera asincrona
+            };
+            var Conexion = Fabrica.CreateConnection();
+            var Canal = Conexion.CreateModel();
+
+            var NombreEvento = typeof(T).Name;
+            Canal.QueueDeclare(NombreEvento, false, false, false, null);
+            var Consumer = new AsyncEventingBasicConsumer(Canal);
+            Consumer.Received += Consumer_Received;
+            Canal.BasicConsume(NombreEvento, true, Consumer);
+        }
+
+        private async Task Consumer_Received(object sender, BasicDeliverEventArgs e)
+        {
+            var NombreEvento = e.RoutingKey;
+            var Mensaje = Encoding.UTF8.GetString(e.Body.ToArray());
+            try
+            {
+                await ProcesarEvento(NombreEvento, Mensaje).ConfigureAwait(false);
+            }
+            catch (Exception varEx)
+            {
+                var Error = varEx.Message;
+            }
+        }
+
+        private async Task ProcesarEvento(string nombreEvento, string mensaje)
+        {
+            if (_manejadores.ContainsKey(nombreEvento))
+            {
+                var Subscritores = _manejadores[nombreEvento];
+                foreach (var item in Subscritores)
+                {
+                    var Manejador = Activator.CreateInstance(item);
+                    if (Manejador == null) continue;
+                    var TipoEvento = _tiposEvento.SingleOrDefault(t => t.Name == nombreEvento);
+                    var EEvento = JsonConvert.DeserializeObject(mensaje, TipoEvento);
+                    var TipoConcreto = typeof(IManejadorEventos<>).MakeGenericType(TipoEvento);
+                    await (Task)TipoConcreto.GetMethod("Manejador").Invoke(Manejador, new object[] { EEvento});
+                }
+            }
         }
 
         public void Publicar<T>(T evento) where T : Eventos
