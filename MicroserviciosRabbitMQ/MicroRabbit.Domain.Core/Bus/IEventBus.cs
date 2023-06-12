@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MicroRabbit.Domain.Core.Comandos;
+using MicroRabbit.Domain.Core.Eventos;
 
 namespace MicroRabbit.Domain.Core.Bus
 {
     public interface IEventBus
     {
         // Crear mensaje en Queue y Consumir
-        void Publicar<T>(T evento) where T : Eventos;
-        void Leer<T, TH>() where T : Eventos where TH : IManejadorEventos<T>;
+        void Publicar<T>(T evento) where T : Eventos.Eventos;
+        void Leer<T, TH>() where T : Eventos.Eventos where TH : IManejadorEventos<T>;
 
         // Comunicacion interna entre clases
-        Task EnviarComando<T>(T Comando) where T : Comandos;
+        Task EnviarComando<T>(T Comando) where T : Comandos.Comandos;
     }
 }
