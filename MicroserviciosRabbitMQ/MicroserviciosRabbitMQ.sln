@@ -22,7 +22,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservicios", "Microserv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroRabbit.Domain.Core", "MicroRabbit.Domain.Core\MicroRabbit.Domain.Core.csproj", "{6A2A999D-C796-496F-85C6-55F14C7D9FEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroRabbit.Infra.Bus", "MicroRabbit.Infra.Bus\MicroRabbit.Infra.Bus.csproj", "{51EF680B-5215-43B4-9C4E-158071CC4F52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroRabbit.Infra.Bus", "MicroRabbit.Infra.Bus\MicroRabbit.Infra.Bus.csproj", "{51EF680B-5215-43B4-9C4E-158071CC4F52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroRabbit.Infra.IoC", "MicroRabbit.Infra.IoC\MicroRabbit.Infra.IoC.csproj", "{D3140506-A69E-4FE6-8782-8C50D8FC5BBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{51EF680B-5215-43B4-9C4E-158071CC4F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51EF680B-5215-43B4-9C4E-158071CC4F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51EF680B-5215-43B4-9C4E-158071CC4F52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3140506-A69E-4FE6-8782-8C50D8FC5BBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3140506-A69E-4FE6-8782-8C50D8FC5BBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3140506-A69E-4FE6-8782-8C50D8FC5BBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3140506-A69E-4FE6-8782-8C50D8FC5BBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,6 +51,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{6A2A999D-C796-496F-85C6-55F14C7D9FEE} = {44DB231E-2BD9-49A3-95E4-4ADD8FE91814}
 		{51EF680B-5215-43B4-9C4E-158071CC4F52} = {E324568F-52EC-4FEB-863F-9B4CC22705C8}
+		{D3140506-A69E-4FE6-8782-8C50D8FC5BBD} = {EB17B0D7-A1A8-4DD7-A2DB-742DFCACF1A7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {45EA5733-8750-4BF3-87C4-FB85D6925825}

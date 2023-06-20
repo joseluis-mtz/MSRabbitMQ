@@ -1,0 +1,1 @@
+Se centralizan todas las inyecciones de dependencias de la solucions
