@@ -1,4 +1,9 @@
-﻿using MicroRabbit.Domain.Core.Bus;
+﻿using MicroRabbit.Banca.Aplicacion.Interfaces;
+using MicroRabbit.Banca.Aplicacion.Servicios;
+using MicroRabbit.Banca.Data.Contexto;
+using MicroRabbit.Banca.Data.Repositorio;
+using MicroRabbit.Banca.Dominio.Interfaces;
+using MicroRabbit.Domain.Core.Bus;
 using MicroRabbit.Infra.Bus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +24,14 @@ namespace MicroRabbit.Infra.IoC
             // Se mapea la clase con una estructura json llamada igual que la clase
             Servicios.Configure<RabbitConfig>(c => Configuracion.GetSection("RabbitConfig"));
 
+            // Desde el proyecto aplicaciones servicios
+            Servicios.AddTransient<ICuentaServicio, CuentaServicio>();
+
+            // Desde Data
+            Servicios.AddTransient<ICuentasRepositorio, CuentasRepositorio>();
+
+            // Contexto
+            Servicios.AddTransient<BancaDbConext>();
         }
     }
 }
