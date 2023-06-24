@@ -4,6 +4,6 @@ namespace MicroRabbit.Banca.Aplicacion.Interfaces
 {
     public interface ICuentaServicio
     {
-        IEnumerable<Cuentas> ObtenerServicios();
+        IEnumerable<Cuentas> ObtenerCuentas();
     }
 }

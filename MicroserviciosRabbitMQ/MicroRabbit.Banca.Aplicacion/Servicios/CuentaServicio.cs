@@ -13,7 +13,7 @@ namespace MicroRabbit.Banca.Aplicacion.Servicios
             _cuentaRepositorio = cuentaRepositorio;
         }
 
-        public IEnumerable<Cuentas> ObtenerServicios()
+        public IEnumerable<Cuentas> ObtenerCuentas()
         {
             return _cuentaRepositorio.ObtenerCuentas();
         }
