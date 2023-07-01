@@ -3,10 +3,12 @@ using MicroRabbit.Banca.Aplicacion.Servicios;
 using MicroRabbit.Banca.Data.Contexto;
 using MicroRabbit.Banca.Data.Repositorio;
 using MicroRabbit.Banca.Dominio.Interfaces;
+using MicroRabbit.Banca.Dominio.Modelos;
 using MicroRabbit.Domain.Core.Bus;
 using MicroRabbit.Infra.Bus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace MicroRabbit.Infra.IoC
 {
@@ -32,6 +34,8 @@ namespace MicroRabbit.Infra.IoC
 
             // Contexto
             Servicios.AddTransient<BancaDbConext>();
+
+            
         }
     }
 }
